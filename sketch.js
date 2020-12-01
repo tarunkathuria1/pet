@@ -1,5 +1,5 @@
 //Create variables here
-var dog,doghappy,database,food,dogimage,doghappyimage;
+var dog,doghappy,database,food,dogimage,doghappyimage,foodStock,lastStock;
 function preload()
 {
   //load images here
@@ -17,17 +17,42 @@ function setup() {
   
   food=database.ref("food")
   food.on("value",readStock)
+
+  feed=createButton("Feed the dog");
+  feed.position(700,95);
+  feed.mousePressed(feedDog);
+
+  addFood=createButton("Add Food");
+  addFood.position(800,95);
+  addFood.mousePressed(addFood);
 }
 
 
 function draw() {  
 background("black")
+fill(255,255,254);
+textSize(15)
+if(lastFed>=12){
+  text("last Feed : "+lastFed%12+ "pm",350,30)
+}else if (lastFed===0){
+  text("last Feed :  12Am",350,30)
+}else{
+  text("last Feed : "+lastFed+ "Am",350,30)
+
+}
   drawSprites();
   //add styles here
 
 }
-function readStock(data){
+function readStock(){
   food=data.val();
+}
+
+function writeStoke(x){
+
+  database.ref('/').update({
+    food:x
+  })
 }
 
 
