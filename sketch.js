@@ -40,6 +40,16 @@ if(lastFed>=12){
   text("last Feed : "+lastFed+ "Am",350,30)
 
 }
+if (gameState!=="hungry"){
+  feed.hide();
+  addFood.hide();
+  dog.remove();
+}else{
+  feed.show();
+  addFood.show();
+  dog.addImage(sadDog);
+}
+
   drawSprites();
   //add styles here
 
